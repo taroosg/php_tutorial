@@ -27,6 +27,7 @@
 - 乱数を発生させ，乱数の値によって大吉-大凶をブラウザに表示する．
 
 ### 1.3 必要な実装
+#### 変数の定義と出力
 - 変数を定義して値を代入する．
 ```php
 // index.php
@@ -53,7 +54,7 @@ echo $number;
 echo  "今日の講義は{$str}です！";
 ```
 
-配列の定義と出力
+#### 配列の定義と出力
 - 配列を定義する．
 ```php
 // index.php
@@ -79,7 +80,7 @@ $array2 = [
 var_dump($array2);
 ```
 
-おみくじの実装
+#### おみくじの実装
 - `mt_rand()`関数を用いてランダムな数を発生させる．
 
 ```php
@@ -142,13 +143,13 @@ if ($num == 1) {
 
 ### 1.4 動作確認
 
-変数と配列の動作確認
+#### 変数と配列の動作確認
 - 下記の画像では全部出力しているので続けて表示される．
 - 個別に出力するとわかりやすい．
 
 ![変数出力の画面](./images/20200227192122.png)
 
-おみくじの動作確認
+#### おみくじの動作確認
 - 再読み込みするごとにおみくじを引き直すので結果が変化する．
 
 ![おみくじの画面](./images/20200227192811.png)
@@ -169,7 +170,7 @@ if ($num == 1) {
 - 受け取り側のファイルで受け取った情報をブラウザに表示する．
 
 ### 2.3 必要な実装
-`GET`でのデータ通信（送信側 / `todo_get.php`）
+#### `GET`でのデータ通信（送信側 / `todo_get.php`）
 
 - `form`タグに`action`属性を追加し，送信先のファイル（`todo_get_confirm.php`）を指定する．
 - `form`タグに`method`属性を追加し，送信方法（`GET`か`POST`）を指定する．今回は`GET`で送信する．
@@ -196,11 +197,10 @@ if ($num == 1) {
   <!-- ... -->
 ```
 
-`GET`でのデータ通信（受信側 / `todo_get_confirm.php`）
+#### `GET`でのデータ通信（受信側 / `todo_get_confirm.php`）
 - `$_GET`で送信されてきたデータを受け取る．
 - （var_dump()を用いて受け取れていることを確認する）
 - 送信側の`input`に設定した`name`属性の値を用いてデータを取り出す．
-- ブラウザに各データを表示する．
 
 ```php
 // todo_get_confirm.php
@@ -216,19 +216,20 @@ $deadline = $_GET["deadline"];
 // 上記の変数をhtmlに埋め込んで表示する
 
 ?>
+```
 
-// html部分に変数を出力
-// ...
+- ブラウザに各データを表示する．
+
+```html
   <tbody>
     <tr>
       <td><?= $todo ?></td>
       <td><?= $deadline ?></td>
     </tr>
   </tbody>
-// ...
 ```
 
-`POST`でのデータ通信（送信側 / `todo_post.php`）
+#### `POST`でのデータ通信（送信側 / `todo_post.php`）
 
 - `form`タグに`action`属性を追加し，送信先のファイル（`todo_post_confirm.php`）を指定する．
 - `form`タグの`method`属性を`POST`にする．
@@ -255,7 +256,7 @@ $deadline = $_GET["deadline"];
   <!-- ... -->
 ```
 
-`POST`でのデータ通信（受信側 / `todo_post_confirm.php`）
+#### `POST`でのデータ通信（受信側 / `todo_post_confirm.php`）
 - `$_POST`で送信されてきたデータを受け取る．
 - （var_dump()を用いて受け取れていることを確認する）
 - 送信側の`input`に設定した`name`属性の値を用いてデータを取り出す．
@@ -289,7 +290,7 @@ $deadline = $_POST["deadline"];
 
 ### 2.4 動作確認
 
-`GET`でのデータ送受信
+#### `GET`でのデータ送受信
 - `todo_get.php`の`form`に情報を入力して`submit`をクリックすると，自動的に`todo_get_coonfirm.php`に入力したデータが表示される．
 
 ![GET送信確認](./images/20200228144542.png)
@@ -298,7 +299,7 @@ $deadline = $_POST["deadline"];
 
 ![GETurl](./images/20200228144559.png)
 
-`POST`でのデータ送受信
+#### `POST`でのデータ送受信
 - `todo_post.php`の`form`に情報を入力して`submit`をクリックすると，自動的に`todo_post_coonfirm.php`に入力したデータが表示される．
 
 ![POST送信確認](./images/20200228144729.png)
@@ -315,24 +316,24 @@ $deadline = $_POST["deadline"];
 - 送信されたデータがtxtファイルに保存されている状態．
 
 ### 3.2 やること
-送信側ファイル（`todo_txt_input.php`）
+#### 送信側ファイル（`todo_txt_input.php`）
 - 入力フォームにデータの送信先を設定する．
 - 入力フォームにデータの送信方法を設定する．
 - 入力フォームにデータの名前を設定する．
 
-受け取り側ファイル（`todo_txt_create.php`）
+#### 受け取り側ファイル（`todo_txt_create.php`）
 - `POST`で情報を受け取る．
 - 受け取った情報をtxtファイルに書き込む．
 - 書き込みが終わったら送信側ファイルを読み込む．
 
-読み取り側ファイル（`todo_txt_read.php`）
+#### 読み取り側ファイル（`todo_txt_read.php`）
 - 実行時，txtファイルを開き，内容を読み込む．
 - 読み込んだデータをブラウザで表示するために整形する．
 - htmlに埋め込み，ブラウザで表示する．
 
 ### 3.3 必要な実装
 
-送信側ファイル（`todo_txt_input.php`）
+#### 送信側ファイル（`todo_txt_input.php`）
 - `form`タグに`action`属性を追加し，送信先のファイル（`todo_txt_create.php`）を指定する．
 - `form`タグの`method`属性を`POST`にする．
 - それぞれの`input`タグに`name`属性を追加し，送信するデータの名前を指定する．今回は`todo`と`deadline`にする．
@@ -357,7 +358,7 @@ $deadline = $_POST["deadline"];
   </form>
 ```
 
-受信側ファイル（`todo_txt_create.php`）
+#### 受信側ファイル（`todo_txt_create.php`）
 - `$_POST`で送信されてきたデータを受け取る．
 - （var_dump()を用いて受け取れていることを確認する）
 - 送信側の`input`に設定した`name`属性の値を用いてデータを取り出す．
@@ -400,7 +401,7 @@ if ($written === FALSE) {
 // txtファイルへの書き込みのみ行うので表示する画面は存在しない
 ```
 
-読み込み側ファイル（`todo_txt_read.php`）
+#### 読み込み側ファイル（`todo_txt_read.php`）
 - txtファイルを開く（`data/todo.txt`）．
 - ファイルをロックする．
 - データを読み込んでタグを付加しつつ配列に格納する．
