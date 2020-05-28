@@ -40,9 +40,9 @@ if ($status == false) {
     $output .= "<td>{$record["todo"]}</td>";
     $output .= "</tr>";
   }
-  // $valueの参照を解除する．解除しないと，再度foreachした場合に最初からループしない
+  // $recordの参照を解除する．解除しないと，再度foreachした場合に最初からループしない
   // 今回は以降foreachしないので影響なし
-  unset($value);
+  unset($record);
 }
 ?>
 
