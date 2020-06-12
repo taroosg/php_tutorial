@@ -9,8 +9,6 @@ $user_id = $_SESSION['id'];
 // DB接続
 $pdo = connect_to_db();
 
-// いいね数カウント
-
 
 // データ取得SQL作成
 $sql = "SELECT * FROM todo_table";
@@ -37,7 +35,6 @@ if ($status == false) {
     $output .= "<td>{$record["deadline"]}</td>";
     $output .= "<td>{$record["todo"]}</td>";
     // edit deleteリンクを追加
-    $output .= "<td><a href='like_create.php?user_id={$user_id}&todo_id={$record["id"]}'>like{$record["cnt"]}</a></td>";
     $output .= "<td><a href='todo_edit.php?id={$record["id"]}'>edit</a></td>";
     $output .= "<td><a href='todo_delete.php?id={$record["id"]}'>delete</a></td>";
     $output .= "</tr>";
