@@ -9,14 +9,14 @@ include("functions.php");
 // DB接続します
 $pdo = connect_to_db();
 
-$user_id = $_POST["user_id"];
+$username = $_POST["username"];
 $password = $_POST["password"];
 
 // データ取得SQL作成&実行
-$sql = 'SELECT * FROM users_table WHERE user_id=:user_id AND password=:password AND is_deleted=0';
+$sql = 'SELECT * FROM users_table WHERE username=:username AND password=:password AND is_deleted=0';
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 $status = $stmt->execute();
 
@@ -39,7 +39,7 @@ if (!$val) {
   $_SESSION = array();
   $_SESSION["session_id"] = session_id();
   $_SESSION["is_admin"] = $val["is_admin"];
-  $_SESSION["user_id"] = $val["user_id"];
+  $_SESSION["username"] = $val["username"];
   $_SESSION["id"] = $val["id"];
   header("Location:todo_read.php");
   exit();

@@ -7,17 +7,17 @@
 include('functions.php');
 
 // データ受け取り
-$user_id = $_POST["user_id"];
+$username = $_POST["username"];
 $password = $_POST["password"];
 
 // DB接続関数
 $pdo = connect_to_db();
 
 // ユーザ存在有無確認
-$sql = 'SELECT COUNT(*) FROM users_table WHERE user_id=:user_id';
+$sql = 'SELECT COUNT(*) FROM users_table WHERE username=:username';
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 if ($status == false) {
@@ -28,7 +28,7 @@ if ($status == false) {
 }
 
 if ($stmt->fetchColumn() > 0) {
-  // user_idが1件以上該当した場合はエラーを表示して元のページに戻る
+  // usernameが1件以上該当した場合はエラーを表示して元のページに戻る
   // $count = $stmt->fetchColumn();
   echo "<p>すでに登録されているユーザです．</p>";
   echo '<a href="todo_login.php">login</a>';
@@ -37,11 +37,11 @@ if ($stmt->fetchColumn() > 0) {
 
 // ユーザ登録SQL作成
 // `created_at`と`updated_at`には実行時の`sysdate()`関数を用いて実行時の日時を入力する
-$sql = 'INSERT INTO users_table(id, user_id, password, is_admin, is_deleted, created_at, updated_at) VALUES(NULL, :user_id, :password, 0, 0, sysdate(), sysdate())';
+$sql = 'INSERT INTO users_table(id, username, password, is_admin, is_deleted, created_at, updated_at) VALUES(NULL, :username, :password, 0, 0, sysdate(), sysdate())';
 
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 $status = $stmt->execute();
 

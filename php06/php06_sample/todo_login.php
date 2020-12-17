@@ -12,7 +12,7 @@
     <fieldset>
       <legend>todoリストログイン画面</legend>
       <div>
-        user_id: <input type="text" name="user_id">
+        username: <input type="text" name="username">
       </div>
       <div>
         password: <input type="text" name="password">
